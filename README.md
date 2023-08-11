@@ -1,5 +1,7 @@
 # Grapesjs Links
 
+> /!\ WARNING: This plugin needs work: I never finished to port it from Silex code base to an independent plugin. Here is [the code in Silex](https://github.com/silexlabs/Silex/blob/dev/src/ts/client/grapesjs/internal-links.ts) and [the unit test](https://github.com/silexlabs/Silex/blob/dev/src/ts/client/grapesjs/internal-links.test.ts)
+
 All the links you need for multi-paged GrapesJs
 
 [DEMO](https://codepen.io/lexoyo/full/oNQrGRM)
