@@ -1,9 +1,61 @@
 # Grapesjs Links
 
-[DEMO](##)
-> **Provide a live demo of your plugin**
-For a better user engagement create a simple live demo by using services like [JSFiddle](https://jsfiddle.net) [CodeSandbox](https://codesandbox.io) [CodePen](https://codepen.io) and link it here in your README (attaching a screenshot/gif will also be a plus).
-To help you in this process here below you will find the necessary HTML/CSS/JS, so it just a matter of copy-pasting on some of those services. After that delete this part and update the link above
+All the links you need for multi-paged GrapesJs
+
+[DEMO](https://codepen.io/lexoyo/full/oNQrGRM)
+
+### Overview
+
+This GrapesJS plugin, named "internal-links", provides functionality for managing internal links within a GrapesJS project. It allows users to set links to different types such as URL, Email, and Page. The plugin also updates links when a page link changes and marks links as issues if a page is removed.
+
+### Installation
+
+To use this plugin, you need to import it and add it to your GrapesJS initialization:
+
+```typescript
+import { internalLinksPlugin } from 'path-to-plugin/internal-links';
+
+grapesjs.init({
+    // ... other GrapesJS options
+    plugins: [internalLinksPlugin],
+});
+```
+
+Features
+
+1. **Link Types**: The plugin supports different link types including:
+   - URL
+   - Email
+   - Page
+
+2. **Automatic Link Updates**: If a page's name changes, all links pointing to that page will be automatically updated.
+
+3. **Error Handling**: If a page is removed, all links pointing to that page will be marked as issues.
+
+4. **Custom UI**: The plugin provides a custom UI as a trait for setting and managing links, making it intuitive for users to set link types and attributes.
+
+### Overview
+
+The GrapesJS Internal Links Plugin is designed to ensure the integrity of internal links even when pages are renamed or deleted. This section provides insights into how the plugin manages these scenarios.
+
+### Page Renaming
+
+When a page is renamed:
+
+1. **Automatic Link Updates**: The plugin automatically scans all the links within the project.
+2. If a link is found that points to the renamed page using its old name, the link is updated to use the new page name.
+3. This ensures that links remain valid and functional even after a page is renamed.
+
+### Page Deletion
+
+When a page is deleted:
+
+1. **Link Integrity Check**: The plugin checks all the links to see if any of them point to the deleted page.
+2. **Issue Reporting**: Links that point to the deleted page are considered "issues". These problematic links are collected into an array.
+3. **Error Handling with `onError`**: If there are any links in the issues array, the `onError` callback is triggered. This callback can be customized to handle these issues in a manner that suits your project's needs. For instance:
+   - Display a warning to the user informing them of broken links.
+   - Automatically remove or disable the problematic links.
+   - Log the issues for debugging or further action.
 
 ### HTML
 ```html
@@ -37,22 +89,13 @@ body, html {
 ## Summary
 
 * Plugin name: `@silexlabs/grapesjs-links`
-* Components
-    * `component-id-1`
-    * `component-id-2`
-    * ...
-* Blocks
-    * `block-id-1`
-    * `block-id-2`
-    * ...
-
-
+* Trait to turn any element into a link
 
 ## Options
 
 | Option | Description | Default |
 |-|-|-
-| `option1` | Description option | `default value` |
+| `onError` | Description option | - |
 
 
 
@@ -83,7 +126,9 @@ Directly in the browser
       // ...
       plugins: ['@silexlabs/grapesjs-links'],
       pluginsOpts: {
-        '@silexlabs/grapesjs-links': { /* options */ }
+        '@silexlabs/grapesjs-links': {
+           onError: components => console.log('These components are links to pages which have been deleted', components)
+	}
       }
   });
 </script>
